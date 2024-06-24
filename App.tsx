@@ -8,12 +8,16 @@ import React from 'react';
 
 import {NavigationContainer} from '@react-navigation/native';
 import MyDrawer from './components/MyDrawer';
+import {StatusBar} from 'react-native';
 
 function App(): React.JSX.Element {
   return (
-    <NavigationContainer>
-      <MyDrawer />
-    </NavigationContainer>
+    <>
+      <StatusBar hidden={true} />
+      <NavigationContainer>
+        <MyDrawer />
+      </NavigationContainer>
+    </>
   );
 }
 export default App;
