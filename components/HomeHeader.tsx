@@ -1,21 +1,27 @@
 import React, {useState} from 'react';
 import {StyleSheet, View} from 'react-native';
 import Button from './atoms/Button';
-// import FeedSwiper from './FeedSwiper';
-import FeedList from './FeedList';
+import AntDesign from 'react-native-vector-icons/AntDesign'
 
 const btns = [
   {id: 'forYou', title: 'For You'},
   {id: 'nearBy', title: 'Nearby'},
 ];
-const HomeHeader = () => {
+const HomeHeader = ({ navigation }) => {
   const [activeButton, setActiveButton] = useState('forYou');
   const handleOnActionButton = (id: string) => {
     setActiveButton(id);
   };
+
+  const onBtnPress = () => {
+    navigation.toggleDrawer()
+  }
   return (
     <>
       <View style={styles.container}>
+        <View>
+          <Button title="Kicchi" onPress={onBtnPress} />
+        </View>
         <View style={styles.containerLeft}>
           {btns.map(b => (
             <Button
@@ -26,12 +32,7 @@ const HomeHeader = () => {
             />
           ))}
         </View>
-        <View>
-          <Button title="..." />
-        </View>
       </View>
-      {/* <FeedSwiper /> */}
-      <FeedList />
     </>
   );
 };
