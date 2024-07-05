@@ -34,6 +34,7 @@ const IMAGES: TSlide[] = [
   },
   {
     assets: [
+      { uri: require('../assets/video2.mp4'), isVideo: true },
       { uri: require('../assets/image.png') }
     ], name: 'Norman', age: 69
   },
@@ -62,6 +63,7 @@ const IMAGES: TSlide[] = [
 const FeedSwiper = () => {
   const ref = useRef<SwiperCardRefType>();
   const [viewedAll, setViewedAll] = useState(false)
+  const [active, setActive] = useState(0)
 
   const renderInnerCard = (item: TAsset) => {
     return (
@@ -90,16 +92,18 @@ const FeedSwiper = () => {
   }
   
 
-  const renderCard = useCallback((item: TSlide) => {
+  const renderCard = (item: TSlide, index) => {
     const asset = item.assets[0]
     return (
       <View style={styles.renderCardContainer}>
         {asset.isVideo ? (
             <Video
+              paused={active !== index}
               source={asset.uri as ReactVideoSource}
               style={styles.renderCardImage}
               resizeMode="cover"
-              repeat={true}
+              // repeat={active !== index}
+              // controls
             />
           ) : <Image
             source={asset.uri as ImageSourcePropType}
@@ -115,7 +119,39 @@ const FeedSwiper = () => {
         </View>
       </View>
     );
-  }, []);
+  }
+
+  // const renderCard = useCallback((item: TSlide, index) => {
+  //   const asset = item.assets[0]
+  //   if (index !== active) {
+  //     return null
+  //   }
+  //   return (
+  //     <View style={styles.renderCardContainer}>
+  //       {asset.isVideo ? (
+  //           <Video
+  //             paused={active !== index}
+  //             source={asset.uri as ReactVideoSource}
+  //             style={styles.renderCardImage}
+  //             resizeMode="cover"
+  //             // repeat={active !== index}
+  //             // controls
+  //           />
+  //         ) : <Image
+  //           source={asset.uri as ImageSourcePropType}
+  //           style={styles.renderCardImage}
+  //           resizeMode="cover"
+  //         />}
+  //       <View style={styles.infoOverlayContainer}>
+  //         <Text style={styles.username}>{item.name}</Text>
+  //         <Text style={[styles.username, styles.age]}>{item.age}</Text>
+  //         <View style={styles.icon}>
+  //           <AntDesign name='star' size={22} color={'white'} />
+  //         </View>
+  //       </View>
+  //     </View>
+  //   );
+  // }, [active]);
   const OverlayLabelRight = useCallback(() => {
     return (
       <View
@@ -167,6 +203,7 @@ const FeedSwiper = () => {
           renderCard={renderCard}
           onSwipeRight={cardIndex => {
             console.log('cardIndex', cardIndex);
+            setActive(cardIndex+1)
           }}
           onSwipedAll={() => {
             console.log('onSwipedAll');
@@ -174,9 +211,11 @@ const FeedSwiper = () => {
           }}
           onSwipeLeft={cardIndex => {
             console.log('onSwipeLeft', cardIndex);
+            setActive(cardIndex+1)
           }}
           onSwipeTop={cardIndex => {
             console.log('onSwipeTop', cardIndex);
+            setActive(cardIndex+1)
           }}
           OverlayLabelRight={OverlayLabelRight}
           OverlayLabelLeft={OverlayLabelLeft}
