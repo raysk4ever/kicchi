@@ -16,6 +16,9 @@ const HomeHeader = ({ navigation }) => {
   const onBtnPress = () => {
     navigation.toggleDrawer()
   }
+  const openScreen = (screen) => {
+    navigation.navigate(screen)
+  }
   return (
     <>
       <View style={styles.container}>
@@ -33,8 +36,8 @@ const HomeHeader = ({ navigation }) => {
           ))}
         </View>
         <View style={styles.containerLeft}>
-          <Button Icon={<AntDesign name='message1' color={'white'} size={16} />} onPress={onBtnPress} />
-          <Button Icon={<AntDesign name='bells' color={'white'} size={16} />} onPress={onBtnPress} />
+          <Button Icon={<AntDesign name='message1' color={'white'} size={16} />} onPress={() => openScreen('Chats')} />
+          <Button  Icon={<AntDesign name='bells' color={'white'} size={16} />} onPress={() => openScreen('Notifications')} />
         </View>
       </View>
     </>
@@ -46,8 +49,8 @@ export default HomeHeader;
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
-    paddingHorizontal: 20,
-    paddingTop: 10,
+    paddingHorizontal: 10,
+    // paddingTop: 10,
     justifyContent: 'space-between',
   },
   containerLeft: {

@@ -302,7 +302,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     width: '96%',
     height: '95%',
-    padding: 10
+    paddingVertical: 10
   },
   overlayLabelContainer: {
     width: '100%',
