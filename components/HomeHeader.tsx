@@ -5,7 +5,7 @@ import AntDesign from 'react-native-vector-icons/AntDesign'
 
 const btns = [
   {id: 'forYou', title: 'For You'},
-  {id: 'nearBy', title: 'Nearby'},
+  {id: 'nearBy', title: 'Nearby'}
 ];
 const HomeHeader = ({ navigation }) => {
   const [activeButton, setActiveButton] = useState('forYou');
@@ -19,9 +19,9 @@ const HomeHeader = ({ navigation }) => {
   return (
     <>
       <View style={styles.container}>
-        <View>
+        {/* <View>
           <Button title="Kicchi" onPress={onBtnPress} />
-        </View>
+        </View> */}
         <View style={styles.containerLeft}>
           {btns.map(b => (
             <Button
@@ -31,6 +31,10 @@ const HomeHeader = ({ navigation }) => {
               active={activeButton === b.id}
             />
           ))}
+        </View>
+        <View style={styles.containerLeft}>
+          <Button Icon={<AntDesign name='message1' color={'white'} size={16} />} onPress={onBtnPress} />
+          <Button Icon={<AntDesign name='bells' color={'white'} size={16} />} onPress={onBtnPress} />
         </View>
       </View>
     </>
