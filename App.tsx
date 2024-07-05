@@ -14,11 +14,11 @@ import { AppContextProvider } from './Context';
 function App(): React.JSX.Element {
   return (
     <>
-    <AppContextProvider>
-      <StatusBar hidden={true} />
-      <NavigationContainer>
-        <MyDrawer />
-      </NavigationContainer>
+      <AppContextProvider>
+        <StatusBar hidden={true} />
+        <NavigationContainer>
+          <MyDrawer />
+        </NavigationContainer>
       </AppContextProvider>
     </>
   );
