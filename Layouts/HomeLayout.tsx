@@ -5,7 +5,6 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function HomeLayout({children}: PropsWithChildren) {
   return (
-    <SafeAreaView style={styles.main}>
     <LinearGradient
       colors={['#2a1b2d', '#4c0e4b', '#4c0e4b', '#2a1b2d']}
       style={styles.linearGradient}>
@@ -13,7 +12,6 @@ export default function HomeLayout({children}: PropsWithChildren) {
           {children}
         </View>
     </LinearGradient>
-  </SafeAreaView>
   )
 }
 
@@ -24,9 +22,10 @@ const styles = StyleSheet.create({
   },
   linearGradient: {
     flex: 1,
+
   },
   mainContent: {
     padding: 10,
-    flex: 1
+    flex: 1,
   }
 });

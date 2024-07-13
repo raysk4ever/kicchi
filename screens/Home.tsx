@@ -1,6 +1,5 @@
 import React from 'react';
 import {SafeAreaView, StyleSheet} from 'react-native';
-import LinearGradient from 'react-native-linear-gradient';
 import HomeHeader from '../components/HomeHeader';
 import FeedSwiper from '../components/FeedSwiper';
 import MyStack from '../components/MyStack';
@@ -13,23 +12,22 @@ export const HomeStack = () => {
     <MyStack />
   )
 }
-export const HomeScreen = ({ navigation }: Props) => {
+export const HomeScreen = ({ navigation }: any) => {
   return (
     <>
-      <HomeLayout>
-        <HomeHeader navigation={navigation} />
-        <FeedSwiper />
-      </HomeLayout>
+    <SafeAreaView style={styles.main}>
+        <HomeLayout>
+          <HomeHeader navigation={navigation} />
+          <FeedSwiper navigation={navigation} />
+        </HomeLayout>
+      </SafeAreaView>
     </>
   );
 };
 
 const styles = StyleSheet.create({
   main: {
+    flex: 1,
     backgroundColor: '#2a1b2d',
-    flex: 1,
-  },
-  linearGradient: {
-    flex: 1,
   },
 });

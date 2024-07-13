@@ -6,19 +6,23 @@ import {
   TouchableOpacity,
   type ImageSourcePropType,
   Text,
+  Pressable,
 } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import MaterialIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import Video, { ReactVideoSource } from 'react-native-video';
 import { Swiper, type SwiperCardRefType } from 'rn-swiper-list';
+import { Colors } from '../Theme/Colors';
+import { useNavigation } from '@react-navigation/native';
+import AssetCard from './AssetCard';
 
 // import { ActionButton } from '../components';
-type TAsset = {
-  uri: ImageSourcePropType | ReactVideoSource,
+export type TAsset = {
+  uri: string
   isVideo?: boolean,
 }
-type TSlide = {
+export type TSlide = {
   name: string;
   age: number;
   assets: TAsset[]
@@ -27,14 +31,14 @@ type TSlide = {
 const IMAGES: TSlide[] = [
   {
     assets: [
-      { uri: require('../assets/video1.mp4'), isVideo: true },
-      { uri: require('../assets/video1.mp4'), isVideo: true },
+      { uri: require('../assets/video1.mov'), isVideo: true },
+      // { uri: require('../assets/video4.mov'), isVideo: true },
       { uri: require('../assets/video1.mp4'), isVideo: true }
     ], name: 'Clyde', age: 69
   },
   {
     assets: [
-      { uri: require('../assets/video2.mp4'), isVideo: true },
+      { uri: require('../assets/video1.mov'), isVideo: true },
       { uri: require('../assets/image.png') }
     ], name: 'Norman', age: 69
   },
@@ -60,56 +64,24 @@ const IMAGES: TSlide[] = [
   },
 ];
 
-const FeedSwiper = () => {
+const FeedSwiper = ({ navigation }: any) => {
   const ref = useRef<SwiperCardRefType>();
   const [viewedAll, setViewedAll] = useState(false)
   const [active, setActive] = useState(0)
 
-  const renderInnerCard = (item: TAsset) => {
-    return (
-      <View style={styles.renderCardContainer}>
-      {item.isVideo ? (
-          <Video
-            source={item.uri as ReactVideoSource}
-            style={styles.renderCardImage}
-            resizeMode="cover"
-            repeat={true}
-          />
-        ) : <Image
-          source={item.uri as ImageSourcePropType}
-          style={styles.renderCardImage}
-          resizeMode="cover"
-        />}
-      {/* <View style={styles.infoOverlayContainer}>
-        <Text style={styles.username}>{item.name}</Text>
-        <Text style={[styles.username, styles.age]}>{item.age}</Text>
-        <View style={styles.icon}>
-          <AntDesign name='star' size={22} color={'white'} />
-        </View>
-      </View> */}
-    </View>
-    )
+  const goToUsersProfile = (data: TSlide) => {
+      navigation.navigate('UserProfile', {data})
   }
   
 
-  const renderCard = (item: TSlide, index) => {
+  const renderCard = (item: TSlide, index: number) => {
     const asset = item.assets[0]
+    // if (asset.isVideo) {
+    //   asset.paused = index !== active
+    // }
     return (
-      <View style={styles.renderCardContainer}>
-        {asset.isVideo ? (
-            <Video
-              paused={active !== index}
-              source={asset.uri as ReactVideoSource}
-              style={styles.renderCardImage}
-              resizeMode="cover"
-              // repeat={active !== index}
-              // controls
-            />
-          ) : <Image
-            source={asset.uri as ImageSourcePropType}
-            style={styles.renderCardImage}
-            resizeMode="cover"
-          />}
+      <Pressable onPress={() => goToUsersProfile(item)} style={styles.renderCardContainer}>
+        <AssetCard asset={asset} />
         <View style={styles.infoOverlayContainer}>
           <Text style={styles.username}>{item.name}</Text>
           <Text style={[styles.username, styles.age]}>{item.age}</Text>
@@ -117,7 +89,15 @@ const FeedSwiper = () => {
             <AntDesign name='star' size={22} color={'white'} />
           </View>
         </View>
-      </View>
+        <View style={styles.infoBadge}>
+          <AntDesign name='picture' size={15} color={Colors.black} />
+          <Text style={{ color: 'black' }}>{item.assets.length}</Text>
+        </View>
+        <View style={[styles.infoBadge, { left: 10, right: 'auto' }]}>
+          <View style={styles.online}></View>
+          <Text style={{ color: 'black' }}>Online</Text>
+        </View>
+      </Pressable>
     );
   }
 
@@ -198,8 +178,8 @@ const FeedSwiper = () => {
         <Swiper ref={ref}
           cardStyle={styles.cardStyle}
           data={IMAGES}
-          disableLeftSwipe
-          disableRightSwipe
+          // disableLeftSwipe
+          // disableRightSwipe
           renderCard={renderCard}
           onSwipeRight={cardIndex => {
             console.log('cardIndex', cardIndex);
@@ -382,6 +362,24 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     width: 35,
     height: 35
+  },
+  infoBadge: {
+    position: 'absolute',
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#ffffff60',
+    paddingHorizontal: 10,
+    paddingVertical: 5,
+    borderRadius: 20,
+    gap: 5,
+    top: 20,
+    right: 20
+  },
+  online: {
+    width: 10,
+    height: 10,
+    backgroundColor: 'teal',
+    borderRadius: 10
   }
 });
 

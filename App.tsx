@@ -6,20 +6,17 @@
  */
 import React from 'react';
 
-import {NavigationContainer} from '@react-navigation/native';
-import MyDrawer from './components/MyDrawer';
 import {StatusBar} from 'react-native';
-import { AppContextProvider } from './Context';
+import { AuthContextProvider } from './Context/AuthContext';
+import Screens from './screens';
 
 function App(): React.JSX.Element {
   return (
     <>
-    <AppContextProvider>
+    <AuthContextProvider>
       <StatusBar hidden={true} />
-      <NavigationContainer>
-        <MyDrawer />
-      </NavigationContainer>
-      </AppContextProvider>
+      <Screens />
+      </AuthContextProvider>
     </>
   );
 }

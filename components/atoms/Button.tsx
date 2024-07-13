@@ -1,7 +1,9 @@
 import React from 'react';
 import {
+  StyleProp,
   StyleSheet,
   Text,
+  TextStyle,
   TouchableOpacity,
   TouchableOpacityProps,
 } from 'react-native';
@@ -9,17 +11,23 @@ import {
 type ButtonProps = TouchableOpacityProps & {
   title?: string;
   active?: boolean;
-  Icon?: any
+  shrink?: boolean
+  Icon?: any,
+  textStyle?: StyleProp<TextStyle>
 };
 
-const Button = ({title = '', active = false, Icon, ...props}: ButtonProps) => {
+const Button = ({title = '', active = false, shrink = false, Icon, textStyle, ...props}: ButtonProps) => {
   return (
     <TouchableOpacity
-      style={[styles.actionButton, active && styles.activeActionButton]}
+      style={[
+          styles.actionButton,
+          active && styles.activeActionButton,
+          // shrink && { width: '' }
+        ]}
       {...props}>
         {Icon}
         {title && (
-          <Text style={[styles.btnText, active && styles.activeBtnText]}>
+          <Text style={[styles.btnText, active && styles.activeBtnText, textStyle]}>
             {title}
           </Text>
         )}
@@ -38,7 +46,8 @@ const styles = StyleSheet.create({
     cursor: 'pointer',
     flexDirection: 'row',
     gap: 10,
-    alignItems: 'center'
+    alignItems: 'center',
+    // justifyContent: 'flex-start'
   },
   activeActionButton: {
     backgroundColor: '#fc3763',
