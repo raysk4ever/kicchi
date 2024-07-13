@@ -1,0 +1,77 @@
+{
+  "project_info": {
+    "project_number": "211149836225",
+    "firebase_url": "https://socialamigo-ddce1.firebaseio.com",
+    "project_id": "socialamigo-ddce1",
+    "storage_bucket": "socialamigo-ddce1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:211149836225:android:88f3089a5500157dd22940",
+        "android_client_info": {
+          "package_name": "com.kicchi.raysk"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "211149836225-i4p0l3pfg9qr9a4f6g90sut43ct4d2uk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDM6q-I8YQI_MiQ9OzMWzUn0vGcawDiSq0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "211149836225-i4p0l3pfg9qr9a4f6g90sut43ct4d2uk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:211149836225:android:5d99f18f77972059",
+        "android_client_info": {
+          "package_name": "com.social.amigo.socialamigo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "211149836225-6j3ao3424gdlem0s0v87a7h9f1jdq35q.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.social.amigo.socialamigo",
+            "certificate_hash": "e56326018de5d4efd1b5f20004a718eb7b0a1c7e"
+          }
+        },
+        {
+          "client_id": "211149836225-i4p0l3pfg9qr9a4f6g90sut43ct4d2uk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDM6q-I8YQI_MiQ9OzMWzUn0vGcawDiSq0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "211149836225-i4p0l3pfg9qr9a4f6g90sut43ct4d2uk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
