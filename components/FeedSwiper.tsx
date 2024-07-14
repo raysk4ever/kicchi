@@ -1,24 +1,19 @@
 import React, { useCallback, useRef, useState } from 'react';
 import {
-  Image,
   StyleSheet,
   View,
   TouchableOpacity,
-  type ImageSourcePropType,
   Text,
   Pressable,
 } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-import MaterialIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import Video, { ReactVideoSource } from 'react-native-video';
 import { Swiper, type SwiperCardRefType } from 'rn-swiper-list';
 import { Colors } from '../Theme/Colors';
-import { useNavigation } from '@react-navigation/native';
 import AssetCard from './AssetCard';
 import MaskShadow from './MaskShadow.tsx'
+import { IMAGES } from '../Utils/data.ts';
 
-// import { ActionButton } from '../components';
 export type TAsset = {
   uri: string
   isVideo?: boolean,
@@ -28,42 +23,6 @@ export type TSlide = {
   age: number;
   assets: TAsset[]
 }
-
-const IMAGES: TSlide[] = [
-  {
-    assets: [
-      { uri: require('../assets/video1.mov'), isVideo: true },
-      // { uri: require('../assets/video4.mov'), isVideo: true },
-      { uri: require('../assets/video1.mp4'), isVideo: true }
-    ], name: 'Clyde', age: 69
-  },
-  {
-    assets: [
-      { uri: require('../assets/video1.mov'), isVideo: true },
-      { uri: require('../assets/image.png') }
-    ], name: 'Norman', age: 69
-  },
-  {
-    assets: [
-      { uri: require('../assets/image2.jpg') }
-    ], name: 'Leon', age: 32
-  },
-  {
-    assets: [
-      { uri: require('../assets/image3.jpg') }
-    ], name: 'Bess', age: 64
-  },
-  {
-    assets: [
-      { uri: require('../assets/image4.jpg') }
-    ], name: 'Rose', age: 29
-  },
-  {
-    assets: [
-      { uri: require('../assets/image5.jpg') }
-    ], name: 'Jonathan', age: 58
-  },
-];
 
 const FeedSwiper = ({ navigation }: any) => {
   const ref = useRef<SwiperCardRefType>();
@@ -218,7 +177,7 @@ const FeedSwiper = ({ navigation }: any) => {
         />
         {viewedAll && (
           <View>
-            <Text>Hi you saw all</Text>
+            <Text style={{ color: 'white' }}>Hi, you saw all!</Text>
           </View>
         )}
       </View>
@@ -230,7 +189,8 @@ const FeedSwiper = ({ navigation }: any) => {
             ref.current?.swipeLeft();
           }}>
           {/* <Text>Skip</Text> */}
-          <AntDesign name="forward" size={32} color="#fc3763" />
+          {/* <AntDesign name="forward" size={32} color="#fc3763" /> */}
+          <Text style={{ fontSize: 35 }}>🙅🏻</Text>
         </ActionButton>
         {/* <ActionButton
           style={[styles.button, {height: 60, marginHorizontal: 10}]}
@@ -249,12 +209,14 @@ const FeedSwiper = ({ navigation }: any) => {
           <AntDesign name="arrowup" size={32} color="white" />
         </ActionButton> */}
         <ActionButton
-          style={[styles.button]}
+          // style={[styles.button]}
+          style={[styles.button, { backgroundColor: 'pink' }]}
           onTap={() => {
             ref.current?.swipeRight();
           }}>
           {/* <Text>Like</Text> */}
-          <AntDesign name="heart" size={32} color="white" />
+          <Text style={{ fontSize: 35 }}>😍</Text>
+          {/* <AntDesign name="heart" size={32} color="white" /> */}
         </ActionButton>
       </View>
     </GestureHandlerRootView>
@@ -271,7 +233,7 @@ const styles = StyleSheet.create({
   },
   buttonsContainer: {
     flexDirection: 'row',
-    bottom: 20,
+    bottom: 30,
     // position: 'absolute',
     width: '50%',
     alignItems: 'center',

@@ -38,6 +38,7 @@ const HomeHeader = ({ navigation }) => {
         <View style={styles.containerLeft}>
           <Button Icon={<AntDesign name='message1' color={'white'} size={16} />} onPress={() => openScreen('Chats')} />
           <Button  Icon={<AntDesign name='bells' color={'white'} size={16} />} onPress={() => openScreen('Notifications')} />
+          <Button  Icon={<AntDesign name='user' color={'white'} size={16} />} onPress={() => openScreen('Profile')} />
         </View>
       </View>
     </>

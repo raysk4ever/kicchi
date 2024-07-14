@@ -17,7 +17,8 @@ const Colors = {
   lightGray4: '#d1d1d6',
   lightGray5: '#e1e1e1',
   lightGray6: '#f2f2f7',
-  grayBG: '#4f3d5090'
+  grayBG: '#4f3d5090',
+  theme_pink: '#fc3763'
 };
 
 export {Colors};

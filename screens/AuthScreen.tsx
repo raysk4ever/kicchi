@@ -11,7 +11,7 @@ import Toast from 'react-native-toast-message';
 // import MaskShadow from "../components/MaskShadow";
 import  Marquee  from '../components/Marquee';
 
-import AssetCard from "../components/AssetCard";
+// import AssetCard from "../components/AssetCard";
 
 
 
@@ -43,7 +43,7 @@ const handleLogin = ({ phone, code }: { phone: string, code: string }) => {
     }, 1000)
   })
 }
-const CommonImage = ({ source }) => {
+const CommonImage = ({ source }: any) => {
   return <Image style={{
     width: 100,
     height: 200,
@@ -149,7 +149,7 @@ const styles = StyleSheet.create({
   form: {
     gap: 20,
     marginTop: 'auto',
-    marginBottom: 20,
+    marginBottom: 40,
     paddingTop: 10,
     // position: 'absolute',
     // bottom: 0,

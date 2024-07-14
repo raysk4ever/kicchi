@@ -1,3 +1,4 @@
+import {TSlide} from '../components/FeedSwiper'
 // export const data = [
 //   {
 //     id: 1,
@@ -343,3 +344,40 @@ export const countries = [
     "image": "https://cdn.jsdelivr.net/npm/country-flag-emoji-json@2.0.0/dist/images/BR.svg"
   }
 ]
+
+export const IMAGES: TSlide[] = [
+  {
+    assets: [
+      // { uri: require('../assets/video4.mov'), isVideo: true },
+      // { uri: require('../assets/video4.mov'), isVideo: true },
+      { uri: require('../assets/image.png') },
+      { uri: require('../assets/video1.mp4'), isVideo: true }
+    ], name: 'Clyde', age: 69
+  },
+  {
+    assets: [
+      { uri: require('../assets/video1.mov'), isVideo: true },
+      { uri: require('../assets/image.png') }
+    ], name: 'Norman', age: 69
+  },
+  {
+    assets: [
+      { uri: require('../assets/image2.jpg') }
+    ], name: 'Leon', age: 32
+  },
+  {
+    assets: [
+      { uri: require('../assets/image3.jpg') }
+    ], name: 'Bess', age: 64
+  },
+  {
+    assets: [
+      { uri: require('../assets/image4.jpg') }
+    ], name: 'Rose', age: 29
+  },
+  {
+    assets: [
+      { uri: require('../assets/image5.jpg') }
+    ], name: 'Jonathan', age: 58
+  },
+];
