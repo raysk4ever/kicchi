@@ -9,6 +9,8 @@ import React from 'react';
 import {StatusBar} from 'react-native';
 import { AuthContextProvider } from './Context/AuthContext';
 import Screens from './screens';
+import Toast from 'react-native-toast-message';
+
 
 function App(): React.JSX.Element {
   return (
@@ -16,6 +18,7 @@ function App(): React.JSX.Element {
     <AuthContextProvider>
       <StatusBar hidden={true} />
       <Screens />
+      <Toast />
       </AuthContextProvider>
     </>
   );

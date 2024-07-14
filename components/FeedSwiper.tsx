@@ -16,6 +16,7 @@ import { Swiper, type SwiperCardRefType } from 'rn-swiper-list';
 import { Colors } from '../Theme/Colors';
 import { useNavigation } from '@react-navigation/native';
 import AssetCard from './AssetCard';
+import MaskShadow from './MaskShadow.tsx'
 
 // import { ActionButton } from '../components';
 export type TAsset = {
@@ -73,31 +74,36 @@ const FeedSwiper = ({ navigation }: any) => {
       navigation.navigate('UserProfile', {data})
   }
   
-
+  
   const renderCard = (item: TSlide, index: number) => {
     const asset = item.assets[0]
     // if (asset.isVideo) {
-    //   asset.paused = index !== active
-    // }
-    return (
-      <Pressable onPress={() => goToUsersProfile(item)} style={styles.renderCardContainer}>
-        <AssetCard asset={asset} />
-        <View style={styles.infoOverlayContainer}>
-          <Text style={styles.username}>{item.name}</Text>
-          <Text style={[styles.username, styles.age]}>{item.age}</Text>
-          <View style={styles.icon}>
-            <AntDesign name='star' size={22} color={'white'} />
+      //   asset.paused = index !== active
+      // }
+      return (
+        <Pressable style={styles.renderCardContainer}>
+          <AssetCard asset={asset} />
+          <MaskShadow />
+          <View style={styles.infoOverlayContainer}>
+            <Text style={styles.username}>{item.name}</Text>
+            <Text style={[styles.username, styles.age]}>{item.age}</Text>
+            {/* <View style={styles.icon}>
+              <AntDesign name='star' size={22} color={'white'} />
+            </View> */}
           </View>
-        </View>
-        <View style={styles.infoBadge}>
-          <AntDesign name='picture' size={15} color={Colors.black} />
-          <Text style={{ color: 'black' }}>{item.assets.length}</Text>
-        </View>
-        <View style={[styles.infoBadge, { left: 10, right: 'auto' }]}>
-          <View style={styles.online}></View>
-          <Text style={{ color: 'black' }}>Online</Text>
-        </View>
-      </Pressable>
+          <View style={styles.infoBadge}>
+            <AntDesign name='picture' size={15} color={Colors.black} />
+            <Text style={{ color: 'black' }}>{item.assets.length}</Text>
+          </View>
+          <Pressable onPress={() => goToUsersProfile(item)} style={[styles.infoBadge, styles.viewProfile]}>
+            <AntDesign name='profile' size={15} color={Colors.black} />
+            <Text style={{ color: 'black' }}>View Profile</Text>
+          </Pressable>
+          <View style={[styles.infoBadge, { left: 10, right: 'auto' }]}>
+            <View style={styles.online}></View>
+            <Text style={{ color: 'black' }}>Online</Text>
+          </View>
+        </Pressable>
     );
   }
 
@@ -373,7 +379,11 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     gap: 5,
     top: 20,
-    right: 20
+    right: 140
+  },
+  viewProfile: {
+    backgroundColor: 'pink',
+    right: 10
   },
   online: {
     width: 10,

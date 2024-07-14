@@ -6,31 +6,41 @@ import {
   TextStyle,
   TouchableOpacity,
   TouchableOpacityProps,
+  ActivityIndicator
 } from 'react-native';
 
 type ButtonProps = TouchableOpacityProps & {
   title?: string;
   active?: boolean;
   shrink?: boolean
+  loading?: boolean;
   Icon?: any,
   textStyle?: StyleProp<TextStyle>
 };
 
-const Button = ({title = '', active = false, shrink = false, Icon, textStyle, ...props}: ButtonProps) => {
+const Button = ({ title = '', active = false, shrink = false, loading = false, Icon, textStyle, ...props }: ButtonProps) => {
   return (
     <TouchableOpacity
       style={[
-          styles.actionButton,
-          active && styles.activeActionButton,
-          // shrink && { width: '' }
-        ]}
+        styles.actionButton,
+        active && styles.activeActionButton,
+        // shrink && { width: '' }
+      ]}
+      disabled={loading}
       {...props}>
-        {Icon}
-        {title && (
-          <Text style={[styles.btnText, active && styles.activeBtnText, textStyle]}>
-            {title}
-          </Text>
-        )}
+      {
+        loading ? (
+          <ActivityIndicator color={'white'} />
+        ) : (
+          <>
+            {Icon}
+            {title && (
+              <Text style={[styles.btnText, active && styles.activeBtnText, textStyle]}>
+                {title}
+              </Text>
+            )}</>
+        )
+      }
     </TouchableOpacity>
   );
 };
@@ -47,6 +57,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     gap: 10,
     alignItems: 'center',
+    maxHeight: 40,
+    justifyContent: 'center'
     // justifyContent: 'flex-start'
   },
   activeActionButton: {

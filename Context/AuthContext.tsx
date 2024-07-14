@@ -47,12 +47,25 @@ export const AuthContextProvider = ({children}: PropsWithChildren) => {
 };
 
 export const useAuth = () =>  {
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [user, setUser] = useState({})
+  const [user, setUserState] = useState({})
+  
+  const setUser = (userData: any) => {
+    setIsLoggedIn(true)
+    setUserState((crr: any) => ({
+      ...crr,
+      name: 'Ravi',
+      ...userData
+    }))
+  }
+  
   return {
     isLoading,
     isLoggedIn,
-    user
+    user,
+    setUser,
+    setIsLoggedIn,
+    setIsLoading
   }
 }

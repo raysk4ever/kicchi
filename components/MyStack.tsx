@@ -6,11 +6,14 @@ import ChatsScreen from '../screens/Chats';
 import { HomeScreen } from '../screens/Home';
 import NotificationScreen from '../screens/Notifications';
 import UserProfile from './UserProfile';
+import { useAuth } from '../Context/AuthContext';
+import AuthScreen from '../screens/AuthScreen';
 
 
 const Stack = createNativeStackNavigator();
 
 const MyStack = () => {
+  const {isLoggedIn, setUser} = useAuth()
   return (
     <Stack.Navigator screenOptions={{
       headerShadowVisible: false,
@@ -19,11 +22,19 @@ const MyStack = () => {
         backgroundColor: '#2a1b2d',
       }
     }}>
-      <Stack.Screen name="Home" component={HomeScreen} options={{ headerShown: false }} />
-      <Stack.Screen name="UserProfile" options={{ title: `User's Profile` }} component={UserProfile} />
-      <Stack.Screen name="Chats" component={ChatsScreen} />
-      <Stack.Screen name="Notifications" component={NotificationScreen} />
-      <Stack.Screen name="Profile" component={ProfileScreen} />
+      {isLoggedIn === true ? (
+        <>
+          <Stack.Screen name="Home" component={HomeScreen} options={{ headerShown: false }} />
+          <Stack.Screen name="UserProfile" options={{ title: `User's Profile` }} component={UserProfile} />
+          <Stack.Screen name="Chats" component={ChatsScreen} />
+          <Stack.Screen name="Notifications" component={NotificationScreen} />
+          <Stack.Screen name="Profile" component={ProfileScreen} />
+        </>
+      ): (
+        <>
+          <Stack.Screen name="Login" component={AuthScreen} initialParams={{setUser}} options={{ headerShown: false }} />
+        </>
+      )}
     </Stack.Navigator>
   );
 };
