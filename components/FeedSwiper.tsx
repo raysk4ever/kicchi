@@ -379,11 +379,12 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     gap: 5,
     top: 20,
-    right: 140
+    right: 140,
+    zIndex: 1
   },
   viewProfile: {
     backgroundColor: 'pink',
-    right: 10
+    right: 10,
   },
   online: {
     width: 10,

@@ -9,8 +9,8 @@ type TMarquee = PropsWithChildren & {
 
 export default function Marquree({children, rtl = false}: TMarquee) {
   return (
-    <AniMarquee spacing={10} speed={.3} style={[
-      { marginBottom: 10 },
+    <AniMarquee spacing={15} speed={.3} style={[
+      { marginBottom: 15 },
       rtl && {transform: [{ scaleX: -1 }]}
     ] as ViewStyle}>
       {children}

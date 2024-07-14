@@ -46,8 +46,10 @@ const handleLogin = ({ phone, code }: { phone: string, code: string }) => {
 const CommonImage = ({ source }) => {
   return <Image style={{
     width: 100,
-    height: 100,
-    resizeMode: 'center'
+    height: 200,
+    backgroundColor: 'gray',
+    resizeMode: 'cover',
+    borderRadius: 10
   }}
     source={source} />
 }
@@ -93,31 +95,32 @@ export default function AuthScreen({ route }: any) {
     <>
       <HomeLayout>
         <KeyboardAvoidingView
-          behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+          behavior={Platform.OS === 'ios' ? 'padding' : undefined}
           style={{ flex: 1 }}
         >
-          <Marquee rtl>
-            <View style={{ flexDirection: 'row', gap: 10 }}>
-              <CommonImage source={require('../assets/image.png')} />
-              <CommonImage source={require('../assets/image5.jpg')} />
-              <CommonImage source={require('../assets/image2.jpg')} />
-            </View>
-          </Marquee>
-          <Marquee>
-            <View style={{ flexDirection: 'row', gap: 10 }}>
-              <CommonImage source={require('../assets/image.png')} />
-              <CommonImage source={require('../assets/image4.jpg')} />
-              <CommonImage source={require('../assets/image3.jpg')} />
-            </View>
-          </Marquee>
-          <Marquee rtl>
-            <View style={{ flexDirection: 'row', gap: 10 }}>
-              <CommonImage source={require('../assets/image.png')} />
-              <CommonImage source={require('../assets/image5.jpg')} />
-              <CommonImage source={require('../assets/image2.jpg')} />
-            </View>
-          </Marquee>
-          
+          <View style={{ flex: 1, overflow: "hidden", justifyContent: 'center' }}>
+            <Marquee rtl>
+              <View style={{ flexDirection: 'row', gap: 15 }}>
+                <CommonImage source={require('../assets/image.png')} />
+                <CommonImage source={require('../assets/image5.jpg')} />
+                <CommonImage source={require('../assets/image2.jpg')} />
+              </View>
+            </Marquee>
+            <Marquee>
+              <View style={{ flexDirection: 'row', gap: 15 }}>
+                <CommonImage source={require('../assets/image4.jpg')} />
+                <CommonImage source={require('../assets/image.png')} />
+                <CommonImage source={require('../assets/image3.jpg')} />
+              </View>
+            </Marquee>
+            {/* <Marquee rtl>
+              <View style={{ flexDirection: 'row', gap: 10 }}>
+                <CommonImage source={require('../assets/image5.jpg')} />
+                <CommonImage source={require('../assets/image.png')} />
+                <CommonImage source={require('../assets/image2.jpg')} />
+              </View>
+            </Marquee> */}
+          </View>
           <GrowAnimation styles={{ marginTop: 'auto' }}>
             <View style={styles.form}>
               <Text style={styles.header}>Login to Kicchi ❤️</Text>
@@ -147,6 +150,13 @@ const styles = StyleSheet.create({
     gap: 20,
     marginTop: 'auto',
     marginBottom: 20,
+    paddingTop: 10,
+    // position: 'absolute',
+    // bottom: 0,
+    // backgroundColor: Colors.white,
+    paddingHorizontal: 10,
+    // elevation: 2
+
   },
   header: {
     fontSize: 30,
