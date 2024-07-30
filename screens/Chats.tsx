@@ -1,10 +1,9 @@
 import React from 'react'
-import { Image, StyleSheet, Text } from 'react-native'
+import { Image, StyleSheet, Text, TouchableOpacity } from 'react-native'
 import HomeLayout from '../Layouts/HomeLayout'
 import Button from '../components/atoms/Button'
 import { View } from 'react-native'
 import { Colors } from '../Theme/Colors'
-import { TouchableOpacity } from 'react-native-gesture-handler'
 import { ScrollView } from 'react-native'
 import AntDesign from 'react-native-vector-icons/AntDesign'
 
