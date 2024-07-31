@@ -19,17 +19,17 @@ export const ProfileScreen = ({}: Props) => {
         </View>
       <ScrollView horizontal>
         <View style={{ flexDirection: 'row', gap: 20 }}>
-          <TouchableOpacity style={styles.addNewImage}>
-            <Text style={{ color: Colors.gray, fontSize: 80, fontWeight: "100" }}>+</Text>
-            <Text style={{ color: Colors.gray, fontSize: 20, fontWeight: "200", textAlign: 'center' }}>
-              Add New Image
-            </Text>
-          </TouchableOpacity>
           <TouchableOpacity style={{ width: 200, height: 350, borderRadius: 30, overflow: 'hidden', backgroundColor: 'white' }}>
             <Image style={{ width: '100%', height: '100%', resizeMode: 'cover' }} source={require('../assets/image2.jpg')} />
           </TouchableOpacity>
           <TouchableOpacity style={{ width: 200, height: 350, borderRadius: 30, overflow: 'hidden', backgroundColor: 'white' }}>
             <Image style={{ width: '100%', height: '100%', resizeMode: 'cover' }} source={require('../assets/image4.jpg')} />
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.addNewImage}>
+            <Text style={{ color: Colors.gray, fontSize: 80, fontWeight: "100" }}>+</Text>
+            <Text style={{ color: Colors.gray, fontSize: 20, fontWeight: "200", textAlign: 'center' }}>
+              Add New Image
+            </Text>
           </TouchableOpacity>
         </View>
       </ScrollView>
@@ -88,7 +88,8 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.grayBG,
     marginVertical: 15 
   },
-  addNewImage: { width: 120,
+  addNewImage: {
+    width: 150,
     height: 350,
     borderRadius: 30,
     borderWidth: 3,

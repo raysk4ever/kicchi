@@ -6,7 +6,8 @@ import {
   TextStyle,
   TouchableOpacity,
   TouchableOpacityProps,
-  ActivityIndicator
+  ActivityIndicator,
+  View
 } from 'react-native';
 
 type ButtonProps = TouchableOpacityProps & {
@@ -16,9 +17,10 @@ type ButtonProps = TouchableOpacityProps & {
   loading?: boolean;
   Icon?: any,
   textStyle?: StyleProp<TextStyle>
+  badge?: any
 };
 
-const Button = ({ title = '', active = false, shrink = false, loading = false, Icon, textStyle, ...props }: ButtonProps) => {
+const Button = ({ title = '', active = false, shrink = false, loading = false, Icon, textStyle, badge, ...props }: ButtonProps) => {
   return (
     <TouchableOpacity
       style={[
@@ -28,6 +30,7 @@ const Button = ({ title = '', active = false, shrink = false, loading = false, I
       ]}
       disabled={loading}
       {...props}>
+      {badge && <Badge badge={badge} />}
       {
         loading ? (
           <ActivityIndicator color={'white'} />
@@ -47,7 +50,34 @@ const Button = ({ title = '', active = false, shrink = false, loading = false, I
 
 export default Button;
 
+const Badge = ({ badge = 10 }) => {
+  return (
+    <View style={styles.badge}>
+      <Text style={styles.badgeText}>{badge}</Text>
+    </View>
+  )
+}
+
 const styles = StyleSheet.create({
+  badge: {
+    backgroundColor: 'red',
+    position: 'absolute',
+    zIndex: 1,
+    padding: 2,
+    width: 20,
+    borderRadius: 50,
+    height: 20,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    right: -5,
+    top: -3
+  },
+  badgeText: {
+    color: 'white',
+    fontSize: 10,
+    fontWeight: '700'
+  },
   actionButton: {
     backgroundColor: '#4f3d5090',
     paddingVertical: 12,

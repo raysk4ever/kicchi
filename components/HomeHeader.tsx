@@ -7,7 +7,7 @@ const btns = [
   {id: 'forYou', title: 'For You'},
   {id: 'nearBy', title: 'Nearby'}
 ];
-const HomeHeader = ({ navigation }) => {
+const HomeHeader = ({ navigation }: any) => {
   const [activeButton, setActiveButton] = useState('forYou');
   const handleOnActionButton = (id: string) => {
     setActiveButton(id);
@@ -16,7 +16,7 @@ const HomeHeader = ({ navigation }) => {
   const onBtnPress = () => {
     navigation.toggleDrawer()
   }
-  const openScreen = (screen) => {
+  const openScreen = (screen: string) => {
     navigation.navigate(screen)
   }
   return (
@@ -36,8 +36,8 @@ const HomeHeader = ({ navigation }) => {
           ))}
         </View>
         <View style={styles.containerLeft}>
-          <Button Icon={<AntDesign name='message1' color={'white'} size={16} />} onPress={() => openScreen('Chats')} />
-          <Button  Icon={<AntDesign name='bells' color={'white'} size={16} />} onPress={() => openScreen('Notifications')} />
+          <Button badge={10} Icon={<AntDesign name='message1' color={'white'} size={16} />} onPress={() => openScreen('Chats')} />
+          <Button badge={20} Icon={<AntDesign name='bells' color={'white'} size={16} />} onPress={() => openScreen('Notifications')} />
           <Button  Icon={<AntDesign name='user' color={'white'} size={16} />} onPress={() => openScreen('Profile')} />
         </View>
       </View>
