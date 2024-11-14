@@ -10,6 +10,7 @@ import { useAuth } from "../Context/AuthContext";
 import Toast from 'react-native-toast-message';
 // import MaskShadow from "../components/MaskShadow";
 import  Marquee  from '../components/Marquee';
+import { useNavigation } from "@react-navigation/native";
 
 // import AssetCard from "../components/AssetCard";
 
@@ -70,6 +71,8 @@ export default function AuthScreen({ route }: any) {
     setCode(text)
   }
 
+  const {navigate} = useNavigation()
+
   const handleOnPress = async () => {
     if (!codeSent) {
       setCodeSent(crr => !crr)
@@ -79,6 +82,7 @@ export default function AuthScreen({ route }: any) {
       setIsLoading(true)
       const result = await handleLogin({ phone, code })
       setUser({ name: 'ravi' })
+      navigate('Home' as never)
     } catch (error) {
       showToast()
       // console.error('error', error)
@@ -135,7 +139,6 @@ export default function AuthScreen({ route }: any) {
                   </GrowAnimation>
                 )
               }
-
               <Button loading={isLoading} onPress={handleOnPress} title={btnText} active textStyle={{ textAlign: 'center', width: '100%' }} />
             </View>
           </GrowAnimation>

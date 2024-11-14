@@ -15,7 +15,7 @@ type TAuthContext = {
   isLoggedIn: boolean;
   isLoading: boolean;
   setIsLoggedIn?: React.Dispatch<React.SetStateAction<boolean>>;
-  user: Record<string, any>
+  user: Record<string, any>;
   // setAppTheme?: React.Dispatch<React.SetStateAction<string>>;
   // isMute?: boolean;
   // setIsMute?: React.Dispatch<React.SetStateAction<boolean>>;
@@ -25,11 +25,11 @@ type TAuthContext = {
 export const AuthContext = createContext<TAuthContext>({
   isLoggedIn: false,
   isLoading: true,
-  user: {}
+  user: {},
 });
 
 export const AuthContextProvider = ({children}: PropsWithChildren) => {
-  const { isLoading, isLoggedIn, user } = useAuth()
+  const {isLoading, isLoggedIn, user} = useAuth();
   // useEffect(() => {
   //   setInitialLoad();
   // });
@@ -39,36 +39,42 @@ export const AuthContextProvider = ({children}: PropsWithChildren) => {
       value={{
         isLoading,
         isLoggedIn,
-        user
+        user,
       }}>
       {children}
     </AuthContext.Provider>
   );
 };
 
-export const useAuth = () =>  {
+export const useAuth = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [user, setUserState] = useState({
     name: 'Ravi',
-    gender: 'male'
-  })
-  
+    gender: 'male',
+  });
+
   const setUser = (userData: any) => {
-    setIsLoggedIn(true)
+    setIsLoggedIn(true);
     setUserState((crr: any) => ({
       ...crr,
       name: 'Ravi',
-      ...userData
-    }))
-  }
-  
+      ...userData,
+    }));
+  };
+
+  const logout = () => {
+    setUserState({name: '', gender: ''});
+    setIsLoggedIn(() => false);
+  };
+
   return {
     isLoading,
     isLoggedIn,
     user,
     setUser,
     setIsLoggedIn,
-    setIsLoading
-  }
-}
+    setIsLoading,
+    logout,
+  };
+};
