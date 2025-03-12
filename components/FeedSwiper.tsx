@@ -13,6 +13,7 @@ import { Colors } from '../Theme/Colors';
 import AssetCard from './AssetCard';
 import MaskShadow from './MaskShadow.tsx'
 import { IMAGES } from '../Utils/data.ts';
+import Button from './atoms/Button.tsx';
 
 export type TAsset = {
   uri: string
@@ -137,6 +138,12 @@ const FeedSwiper = ({ navigation }: any) => {
     );
   }, []);
 
+  const handleFeedRefresh = () => {
+    setViewedAll(false)
+    setActive(0)
+    ref.current?.reset()
+  }
+
   return (
     <GestureHandlerRootView style={styles.container}>
       <View style={styles.subContainer}>
@@ -178,6 +185,7 @@ const FeedSwiper = ({ navigation }: any) => {
         {viewedAll && (
           <View>
             <Text style={{ color: 'white' }}>Hi, you saw all!</Text>
+            <Button title='Refresh' onPress={() => handleFeedRefresh} />
           </View>
         )}
       </View>

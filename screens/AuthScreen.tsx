@@ -1,16 +1,21 @@
+import React, { useState } from "react";
 import { Image, KeyboardAvoidingView, Platform, StyleSheet, Text, TextInput, View, } from "react-native";
 import HomeLayout from "../Layouts/HomeLayout";
 import { Colors } from "../Theme/Colors";
 import Button from "../components/atoms/Button";
-import { useState } from "react";
 import CountryCode from "../components/CountryCode";
 import GrowAnimation from "../animate/grow";
 import { useAuth } from "../Context/AuthContext";
 // import { useNavigation } from "@react-navigation/native";
 import Toast from 'react-native-toast-message';
 // import MaskShadow from "../components/MaskShadow";
-import  Marquee  from '../components/Marquee';
-
+import Marquee from '../components/Marquee';
+import { useNavigation } from "@react-navigation/native";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { RootStackParamList } from "../types/navigation";
+import GradientText from "../components/GradientText";
+import axios from "axios";
+import { axiosInstance } from "../Utils/axios";
 // import AssetCard from "../components/AssetCard";
 
 
@@ -34,14 +39,17 @@ const data = [
   { label: 'Item 8', value: '8' },
 ];
 
-const handleLogin = ({ phone, code }: { phone: string, code: string }) => {
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      if (phone === '123' && code === '123')
-        return resolve('Login Successfully')
-      return reject('Invalid Login')
-    }, 1000)
-  })
+const handleLogin = async ({ phone, code }: { phone: string, code: string }) => {
+  // return new Promise((resolve, reject) => {
+  //   setTimeout(() => {
+  //     if (phone !== '' && code === '123')
+  //       return resolve('Login Successfully')
+  //     return reject('Invalid Login')
+  //   }, 1000)
+  // })
+  const response = await axiosInstance.post('/auth/sign-up', { phone, code, type: 'phone' })
+  return response.data
+  
 }
 const CommonImage = ({ source }: any) => {
   return <Image style={{
@@ -54,14 +62,15 @@ const CommonImage = ({ source }: any) => {
     source={source} />
 }
 
+type AuthScreenNavigationProp = NativeStackNavigationProp<RootStackParamList, 'Auth'>;
 
-export default function AuthScreen({ route }: any) {
+export default function AuthScreen({ route, navigation }: { route: any, navigation: AuthScreenNavigationProp }) {
   const [phone, setPhone] = useState('')
   const [code, setCode] = useState('')
   const [codeSent, setCodeSent] = useState(false)
-  const { isLoggedIn, isLoading, setIsLoading } = useAuth()
-  // const { navigate } = useNavigation()
-  const { setUser } = route.params;
+  const { isLoggedIn, isLoading, setIsLoading, setUser, setIsLoggedIn } = useAuth()
+  const { navigate } = useNavigation()
+  // const { setUser, setIsLoggedIn } = route.params;
   const handleOnChangeText: (text: string) => void = (text) => {
     setPhone(text)
   }
@@ -71,6 +80,9 @@ export default function AuthScreen({ route }: any) {
   }
 
   const handleOnPress = async () => {
+    const result = await handleLogin({ phone: '6396180310', code: '123' })
+    console.log('result', result)
+    setUser({...result.user, token: result.token})
     if (!codeSent) {
       setCodeSent(crr => !crr)
       return
@@ -78,7 +90,10 @@ export default function AuthScreen({ route }: any) {
     try {
       setIsLoading(true)
       const result = await handleLogin({ phone, code })
-      setUser({ name: 'ravi' })
+      console.log('result', result)
+      setUser({...result.user, token: result.token})
+      setIsLoggedIn(true)
+      navigate('Home' as never)
     } catch (error) {
       showToast()
       // console.error('error', error)
@@ -123,7 +138,10 @@ export default function AuthScreen({ route }: any) {
           </View>
           <GrowAnimation styles={{ marginTop: 'auto' }}>
             <View style={styles.form}>
+              <View style={styles.brandName}>
               <Text style={styles.header}>Login to Kicchi ❤️</Text>
+              {/* <GradientText colors={['#cc2b5e', '#753a88']} style={styles.text}>Kichhi</GradientText> */}
+              </View>
               <View style={{ flexDirection: 'row', gap: 10, alignItems: 'center' }}>
                 <CountryCode />
                 <TextInput value={phone} onChangeText={handleOnChangeText} placeholder="Enter Phone XXXXXXXX" keyboardType="phone-pad" style={[styles.input, { flex: 1 }]} placeholderTextColor={'gray'} />
@@ -135,7 +153,6 @@ export default function AuthScreen({ route }: any) {
                   </GrowAnimation>
                 )
               }
-
               <Button loading={isLoading} onPress={handleOnPress} title={btnText} active textStyle={{ textAlign: 'center', width: '100%' }} />
             </View>
           </GrowAnimation>
@@ -149,7 +166,7 @@ const styles = StyleSheet.create({
   form: {
     gap: 20,
     marginTop: 'auto',
-    marginBottom: 40,
+    marginBottom: 50,
     paddingTop: 10,
     // position: 'absolute',
     // bottom: 0,
@@ -168,8 +185,25 @@ const styles = StyleSheet.create({
     padding: 12,
     color: 'white',
     borderRadius: 30,
+    fontSize: 20,
+    fontWeight: 'bold'
   },
   // codeInput: {
   //   paddingVertical: 20
   // }
+  text: {
+    color: 'black',
+    fontSize: 14,
+  },
+  gradient: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+  },
+  brandName: {
+    flexDirection: 'row',
+    alignItems: 'center'
+  }
 })

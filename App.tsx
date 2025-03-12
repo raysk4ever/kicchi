@@ -11,7 +11,6 @@ import { AuthContextProvider } from './Context/AuthContext';
 import Screens from './screens';
 import Toast from 'react-native-toast-message';
 
-
 function App(): React.JSX.Element {
   return (
     <>

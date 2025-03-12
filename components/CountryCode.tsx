@@ -1,8 +1,14 @@
-import React, { useState, useMemo, useEffect } from 'react';
+import React, {useState, useMemo, useEffect} from 'react';
 
-import { StyleSheet, Text, TouchableOpacity, SafeAreaView, View } from 'react-native';
-import { Picker, onOpen } from 'react-native-actions-sheet-picker';
-import { countries } from '../Utils/data';
+import {
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  SafeAreaView,
+  View,
+} from 'react-native';
+import {Picker, onOpen} from 'react-native-actions-sheet-picker';
+import {countries} from '../Utils/data';
 import Button from './atoms/Button';
 
 export default function CountryCode() {
@@ -23,7 +29,7 @@ export default function CountryCode() {
       return data.filter((item: any) =>
         item.name
           .toLocaleLowerCase('en')
-          .includes(query.toLocaleLowerCase('en'))
+          .includes(query.toLocaleLowerCase('en')),
       );
     }
   }, [data, query]);
@@ -38,8 +44,12 @@ export default function CountryCode() {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Button title={selected} onPress={() =>  onOpen('country')} />
-      <Picker
+      <Button
+        textStyle={{fontSize: 20, fontWeight: 'bold'}}
+        title={selected}
+        onPress={() => onOpen('country')}
+      />
+      {/* <Picker
         id="country"
         data={filteredData}
         inputValue={query}
@@ -47,7 +57,7 @@ export default function CountryCode() {
         label="Select Country"
         setSelected={(item: any) => setSelected(item.cc)}
         onSearch={onSearch}
-      />
+      /> */}
     </SafeAreaView>
   );
 }
@@ -55,5 +65,5 @@ export default function CountryCode() {
 const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
-  }
+  },
 });

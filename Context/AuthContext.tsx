@@ -47,20 +47,31 @@ export const AuthContextProvider = ({children}: PropsWithChildren) => {
 };
 
 export const useAuth = () =>  {
+
   const [isLoading, setIsLoading] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(true);
+
   const [user, setUserState] = useState({
     name: 'Ravi',
     gender: 'male'
   })
-  
+  console.log('user----', user)
   const setUser = (userData: any) => {
+    console.log('userData', userData)
     setIsLoggedIn(true)
     setUserState((crr: any) => ({
       ...crr,
       name: 'Ravi',
       ...userData
     }))
+  }
+
+  const logout = () => {
+    setIsLoggedIn(false)
+    setUserState({
+      name: '',
+      gender: ''
+    })
   }
   
   return {
@@ -69,6 +80,7 @@ export const useAuth = () =>  {
     user,
     setUser,
     setIsLoggedIn,
-    setIsLoading
+    setIsLoading,
+    logout
   }
 }

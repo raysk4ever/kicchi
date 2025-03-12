@@ -87,7 +87,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     gap: 10,
     alignItems: 'center',
-    maxHeight: 40,
+    maxHeight: 50,
     justifyContent: 'center'
     // justifyContent: 'flex-start'
   },

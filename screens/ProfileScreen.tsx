@@ -3,12 +3,31 @@ import HomeLayout from "../Layouts/HomeLayout";
 import { Colors } from "../Theme/Colors";
 import MaskShadow from "../components/MaskShadow";
 import { useAuth } from "../Context/AuthContext";
+import Button from "../components/atoms/Button";
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { RootStackParamList } from '../types/navigation';
 
 type Props = {
  
 }
+
+type ProfileScreenNavigationProp = NativeStackNavigationProp<RootStackParamList>;
+
 export const ProfileScreen = ({}: Props) => {
-  const { user } = useAuth()
+  const { user, logout } = useAuth();
+  const navigation = useNavigation<ProfileScreenNavigationProp>();
+
+  const handleLogout = async () => {
+    await logout();
+    navigation.reset({
+      index: 0,
+      routes: [{ name: 'Login' }],
+    });
+  };
+
+  console.log(user, 'user')
+
   return ( 
     <HomeLayout>
       <ScrollView style={{ }}>
@@ -71,6 +90,8 @@ export const ProfileScreen = ({}: Props) => {
           </TouchableOpacity>
         </View>
       </View>
+        <View style={{ marginBottom: 40 }}/>
+        <Button title="Logout" onPress={handleLogout} />
         <View style={{ marginBottom: 40 }}/>
       </ScrollView>
     </HomeLayout>

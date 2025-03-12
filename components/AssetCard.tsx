@@ -15,7 +15,8 @@ export default function AssetCard({ asset }: {asset: TAsset}) {
           // controls
         />
       ) : <Image
-          source={asset.uri as ImageURISource}
+          // source={asset.uri as ImageURISource}
+          source={{ uri: `https://picsum.photos/900/1800?t=${asset.uri}` }}
           style={styles.renderCardImage}
           resizeMode="cover"
       />}

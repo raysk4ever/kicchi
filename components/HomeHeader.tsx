@@ -1,24 +1,21 @@
 import React, {useState} from 'react';
 import {StyleSheet, View} from 'react-native';
 import Button from './atoms/Button';
-import AntDesign from 'react-native-vector-icons/AntDesign'
+import AntDesign from 'react-native-vector-icons/AntDesign';
 
 const btns = [
   {id: 'forYou', title: 'For You'},
-  {id: 'nearBy', title: 'Nearby'}
+  {id: 'nearBy', title: 'Nearby'},
 ];
-const HomeHeader = ({ navigation }: any) => {
+const HomeHeader = ({navigation}: any) => {
   const [activeButton, setActiveButton] = useState('forYou');
   const handleOnActionButton = (id: string) => {
     setActiveButton(id);
   };
 
-  const onBtnPress = () => {
-    navigation.toggleDrawer()
-  }
   const openScreen = (screen: string) => {
-    navigation.navigate(screen)
-  }
+    navigation.navigate(screen);
+  };
   return (
     <>
       <View style={styles.container}>
@@ -36,9 +33,20 @@ const HomeHeader = ({ navigation }: any) => {
           ))}
         </View>
         <View style={styles.containerLeft}>
-          <Button badge={10} Icon={<AntDesign name='message1' color={'white'} size={16} />} onPress={() => openScreen('Chats')} />
-          <Button badge={20} Icon={<AntDesign name='bells' color={'white'} size={16} />} onPress={() => openScreen('Notifications')} />
-          <Button  Icon={<AntDesign name='user' color={'white'} size={16} />} onPress={() => openScreen('Profile')} />
+          <Button
+            badge={10}
+            Icon={<AntDesign name="message1" color={'white'} size={16} />}
+            onPress={() => openScreen('Chats')}
+          />
+          <Button
+            badge={20}
+            Icon={<AntDesign name="bells" color={'white'} size={16} />}
+            onPress={() => openScreen('Notifications')}
+          />
+          <Button
+            Icon={<AntDesign name="user" color={'white'} size={16} />}
+            onPress={() => openScreen('Profile')}
+          />
         </View>
       </View>
     </>
